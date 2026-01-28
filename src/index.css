@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Pure Minimalist Light Mode */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --border: 240 5.9% 90%;
+    --radius: 0.5rem;
+
+    /* Professional Purple - Bright but readable */
+    --portfolio-primary: 270 91% 60%;   /* Vivid Purple */
+    --portfolio-secondary: 250 84% 54%; /* Deep Indigo */
+    --portfolio-accent: 270 91% 60%;
+    --portfolio-warm: 240 5% 96%;
+  }
+
+  .dark {
+    /* Lighter "Slate" Black instead of Pure Black */
+    --background: 240 6% 10%;        /* Deep Charcoal/Slate */
+    --foreground: 0 0% 98%;
+    --card: 240 6% 13%;              /* Slightly lighter card for contrast */
+    --card-foreground: 0 0% 98%;
+    --border: 240 5% 20%;            /* Visible borders */
+
+    /* Vibrant Purple Accents for Dark Mode */
+    --portfolio-primary: 270 100% 75%;  /* Bright Amethyst */
+    --portfolio-secondary: 250 100% 75%; /* Soft Indigo */
+    --portfolio-accent: 270 100% 75%;
+    --portfolio-warm: 240 6% 12%;
+  }
+}
+
+@layer components {
+  /* Name Pop: Pure Purple to Soft Highlight */
+  .name-pop {
+    /* Gradient shifts through Purple and a soft center highlight */
+    @apply bg-gradient-to-r from-portfolio-primary via-[#e0aaff] to-portfolio-secondary bg-clip-text text-transparent;
+    @apply font-extrabold tracking-tighter;
+    /* Glow tuned to purple */
+    filter: drop-shadow(0 0 10px hsl(var(--portfolio-primary) / 0.35));
+    background-size: 200% auto;
+    animation: textShine 5s ease-in-out infinite;
+  }
+
+  @keyframes textShine {
+    0% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+    100% { background-position: 0% center; }
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-br from-foreground via-foreground to-portfolio-primary bg-clip-text text-transparent;
+  }
+
+  .cozy-card {
+    /* Subtle Glassmorphism on the lighter black background */
+    @apply bg-card/60 backdrop-blur-sm border border-border/50 rounded-xl shadow-lg hover:shadow-portfolio-primary/10 hover:border-portfolio-primary/40 transition-all duration-300;
+  }
+
+  .warm-bg {
+    @apply bg-background relative;
+    /* Dot grid is more visible on charcoal than pure black */
+    background-image: radial-gradient(circle at center, hsl(var(--border)) 1.2px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .section-glow::before {
+    content: "";
+    @apply absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-portfolio-primary/15 blur-[120px] rounded-full pointer-events-none;
+  }
+}
