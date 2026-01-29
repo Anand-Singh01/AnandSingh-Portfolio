@@ -21,7 +21,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <ThemeProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
           <div className="min-h-screen bg-background text-foreground">
             <Navigation />
             <main>
